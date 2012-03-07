@@ -1,0 +1,102 @@
+Maze Generation
+===============
+
+Problem Statement
+-----------------
+
+You will take two inputs m, n which are the number of rows and columns
+in the maze. The entrance to the maze is always on the northern side of
+the cell that is in the top left. The exit from the maze is always the
+eastern side of the cell in the right bottom. Initially, each cell in
+the maze has rigid walls around them except the entrance and exit.
+A sample starting point is given for a 4 x 4 maze below.
+
+<img src="rooms1.png" />
+
+You then remove a random wall at a time to connect ad-joint rooms.
+A good maze must have the following properties:
+
+  1. **Randomization:** Removal of walls must be randomized so that
+     different mazes can be generated for different runs.
+  2. **Single Solution:** There must be only one solution to the maze
+     i.e. there must be only one path from entrance to exit. Otherwise,
+     a maze solver may easily find a solution to the maze. Therefore,
+     you should remove walls between two rooms x and y only when they
+     are not connected so far. Once the wall is knocked down, you can
+     call breakWall(x, y) so that the rooms become connected. For
+     example, consider the maze below. Cells 6 and 10 are already
+     connected and therefore the wall between cells 6 and 10 should not
+     be knocked down hereafter.
+     <img src="rooms2.png">
+  3. **Connectedness:** Every room in the maze should be reachable
+     from the entrance. There should be no part of the maze that is
+     left out unconnected from the entrance.
+
+A sample maze which follows these rules is given below.
+
+<img src="rooms3.png">
+
+Design
+------
+
+Rooms are numbered in row major ordering starting from top left corner
+going rightwards and then downwards as shown in the above mazes. A wall
+can then be specified as an edge between a pair of rooms (x, y). If
+a wall gets selected at random, it must be removed by performing
+a breakWall(x, y) provided any of the above conditions is not violated.
+It is possible that path from entrance to exit is ready but the maze is
+not fully connected. You must keep knocking walls off till all the rooms
+become reachable from entrance.
+
+Input
+-----
+The program should accept the number of rows m and columns n of rooms in
+the maze as command-line arguments. If no command line arguments are
+given, it should default to 20 rows by 20 columns.
+
+Output
+------
+The program should print the list of the walls (x, y) knocked down
+during generation of the maze.
+
+Working With Graphical Interface
+--------------------------------
+
+First of all you have to provide maze size as M N ( e.g 4 4) as
+a command line argument.  In the file MyMaze.java we have already
+created a class MyMaze which is a sub-class to base class Maze. In this
+there will be a empty function generate,  you have write your maze
+generation code in this function.		
+
+~~~~~~~~~{.java}
+public void generate(Recorder recorder) { }
+~~~~~~~~~
+
+  * The generate function accepts an object of Recorder class. The main
+    function of the Recorder class is to store the moves made by you
+    (i.e the sequence of walls broken by you) so that it can be
+    displayed graphically. Don't worry about it's implementation.
+
+  * Inside the generate function you should call two functions in
+    sequence; (a) breakWall(x,y) & recorder.takeSnap(this). breakWall
+    registers the fact that the wall between x and y has been removed,
+    and takeSnap sends this information to the UI. After each call of
+    breakWall(x,y), you should call recorder.takeSnap(this).
+
+  * Briefly, your generate function should generate two random adjacent
+    room numbers x and y which meet the above conditions, and pass these
+    room numbers to breakWall(x,y) function. E.g suppose you have
+    generated 4, 5 as two random numbers &  so your call sequence in
+    this case should be like
+
+~~~~~~~~~{.java}
+   breakWall(4, 5) ;
+   recorder.takeSnap(this) ;  
+~~~~~~~~~
+
+Using the Interface
+-------------------
+
+On the graphical interface you will find four buttons, Play, Rewind,
+Next and Prev; their functioning is rather obvious ;-).
+ 

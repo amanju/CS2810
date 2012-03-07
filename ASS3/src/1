@@ -1,0 +1,37 @@
+/*A.Manjunath,CS10B001			Date:22/1/2012
+ *   This Program tests sorting algorithms in SortingFunctions.java by passing a list of Strings to those functions
+ *   It then prints Average time taken by the function for a given input size over 10 cycles.
+ * */
+import java.util.*;
+
+public class StringSorting {
+	public static void main(String[] args) {
+		RandomString randString = new RandomString(); // random string variable
+		List<String> SList = new LinkedList<String>(); // List to store strings can be ArrayList or LinkedList
+
+		int n = 10, N;//n is length of each string, N is size of the SList
+		double AveTime = 0;
+		for (N = 10; N < 1000000; N *= 10) {
+			for (int j = 0; j < 10; j++) {
+				for (int i = 0; i < N; i++) {
+					SList.add(randString.nextString(n));
+				}
+				
+				/*
+				 * this part calculates runtime of the function
+				 */
+				long start = System.nanoTime();
+				//SortingFunctions.InsertionSort(SList,0,N);
+				SortingFunctions.MergeSort(SList, 0,N);
+				//SortingFunctions.BubbleSort(SList, 0,N);
+				//SortingFunctions.MergeAndInsertionSort(SList, 0,N);
+				long end = System.nanoTime();
+				AveTime += (end - start) / 1000000L;
+				System.out.println(AveTime);
+			}
+			SList.clear();
+			System.out.println("for N " + N + " Average time is " + AveTime
+					/ 10);
+		}
+	}
+}

@@ -1,0 +1,20 @@
+One of the key constructs in object oriented programming is that of the
+'interface'. The interface allows you to specify the essential functions
+required for a task, without placing any constraints on how those
+functions are implemented.
+
+In this assignment, you will write two complex number class that
+implements two interfaces; 
+1. IComplex - A complex number interface that provides support for basic
+   operations on complex numbers.
+2. Comparable - A standard Java interface for the comparison of two
+   objects
+
+One of them (Complex) will use the "x + iy" representation, and the
+other (PolarComplex) will use the "a e^{i \theta}". Implement
+constructors that take arguments (re,im) and (abs,arg) respectively.
+Extensive test cases have been provided to test functionality. When
+creating your classes, remember to add "IComplex" and "Comparable" as
+interfaces. Then proceed to implement each function. Also, remember to
+run your class as a JUnit Test case.
+

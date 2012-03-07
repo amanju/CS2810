@@ -1,0 +1,15 @@
+Nearest Prime Number
+====================
+
+Find the nearest prime number to a given number X. If X is prime, print it. If there are two equally distant prime numbers, print the smaller one. For example, 43 and 47 are both nearest primes to 45; print 43.
+
+You are expected to write a function to test if a number is prime and sequentially check all numbers near X, but alternate solutions will be accepted.
+
+Example:
+--------
+Input:
+> 45 
+
+Output:
+> 43
+

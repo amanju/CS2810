@@ -1,0 +1,87 @@
+Knight's Tour
+=============
+
+Is it possible to visit every possible square on a chess-board exactly
+once using a single knight (also known as a horse)? 
+
+<center>
+<img src="http://www.cse.iitm.ac.in/moodle/file.php/176/lab4/Knights-Tour-Animation.gif" />
+</center>
+
+This is the famous Knight's Tour problem. In this assignment, you will
+have to computationally search for a solution to the problem. We have
+written a simple UI to help you visualise what your algorithm is doing.
+This will require you to inherit a particular class, and use
+a couple of functions.
+
+<center>
+<img src="http://www.cse.iitm.ac.in/moodle/file.php/176/lab4/knights-tour-gui.png" /> 
+</center>
+
+Interfacing
+-----------
+
+  * You will need to inherit the "ChessBoard" class and implement
+  a single abstract function, <code>List<Move> tour(Move start)</code>
+
+  * In order to draw the UI, your main function must call the
+  "initialise" routine, as follows:
+
+      public class MyTour extends ChessBoard {
+        public static void main(String[] args) {
+          // Initialise must be called to setup the gui
+          initialise(new MyTour());
+        }
+
+        @Override
+        List<Move> tour(Move m) {
+          // Solve
+        }
+
+  * When writing your algorithm, when you move the knight to a new
+  square, call the <code>makeMove(Move)</code> function. If you need to
+  "backtrack" or return the knight to the previous position, call the
+  <code>undoMove()</code> function.
+
+  * We have provided a function <code>Move[] reachableMoves()</code>
+  that retrieves the valid positions a knight could move to from the
+  current position (all L-like moves that are within the board).
+
+FAQ
+---
+
+  1. It takes forever to run! Is this normal?
+    * The standard brute-force approach *will not work*; you will see
+    tens of thousands of steps before you discover a valid knight's
+    tour. The key lies in exploring the *right* positions first. Code
+    a brute-force solution first and observe where the solution gets
+    stuck. Experiment with different exploration strategies and see how
+    they help. Many solutions are in the 200-1,000 range with the right
+    *heuristic*.
+
+  2. Hmm... How can I use the standard sorting routines provided by Java?
+    * In order to sort the elements of an array, you can use the
+    <code>Arrays.sort(T[], Comparator<? super T>)</code> function. To
+    implement a comparator, you will have to create a private class like
+    this:
+
+        public class MyTour extends ChessBoard {
+          ...
+          private class MoveComparator implements Comparator<Move> {
+            public MoveComparator( ) {}
+            
+            @Override
+            public int compare(Move o1, Move o2) {
+              // Pretty useless of a comparison
+              return (o1.row - o2.row) + (o1.col - o2.col);
+            }
+          }
+          ...
+        }
+
+  3. The stop button does not work!
+    * Unfortunately, without considerably complicating your program it
+    is hard to ensure that your code has stopped. If you can write your
+    code to return null as soon as possible when the "isRunning()"
+    function returns true, then all will be well. Otherwise, manage ;-).
+
